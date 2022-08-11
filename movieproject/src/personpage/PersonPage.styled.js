@@ -232,6 +232,7 @@ export const DiscographyCard = styled.div`
         img {
             //Crap exact values
             min-width: 12rem;
+            max-width: 12rem;
             min-height: 15rem;
             max-height: 15rem;
             object-fit: cover;
