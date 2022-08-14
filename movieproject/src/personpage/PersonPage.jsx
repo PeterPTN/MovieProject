@@ -32,7 +32,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   const { id } = useParams();
   const { mediaData, castData, isPending } = useTMDbIDSearch({ id, person, TMDb });
 
-  if (castData.length <= 50) {
+  if (castData.length > 0) {
     firstCreditHalf = castData.slice(0, castData.length / 2)
     secCreditHalf = castData.slice(castData.length / 2 + 1);
   }
@@ -48,7 +48,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   const { convertedDate } = useDateConversion({ rawDate });
 
   //console.log("media", mediaData)
-  //console.log("credit", creditData)
+  console.log("cast", castData)
 
   function handleClick() {
     showText === "hide" ? setShowText("show") : setShowText("hide");
@@ -69,7 +69,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
         </PersonContainer>
       </PersonWrapper>
     )
-  } else if (mediaData.id == id && castData.length <= 50) {
+  } else if (mediaData.id == id && firstCreditHalf.length > 0 && secCreditHalf.length > 0) {
     return (
       <PersonWrapper className="padding">
         <PersonContainer>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { RateLimiter } from "limiter";
 
 const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     const [mediaData, setMediaData] = useState([]);
@@ -10,7 +9,6 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     const [recData, setRecData] = useState([]);
     const [isPending, setIsPending] = useState(null);
     const abortCont = new AbortController();
-    const limiter = new RateLimiter({ tokensPerInterval: 50, interval: "second" });
 
     const TMDbIdData = async ({ id, movie, tv, person }) => {
         let idUrl;
@@ -30,7 +28,6 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     }
 
     async function TMDbIdCredit({ id, movie, tv, person }) {
-        let tokens = 50;
         let creditUrl;
         if (movie) {
             creditUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDb.key}`;
@@ -39,11 +36,12 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         } else if (person) {
             creditUrl = `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${TMDb.key}`;
         }
-        const creditResponse = await fetch(creditUrl);
+        const creditResponse = await fetch(creditUrl, { "Retry-After": 1 });
         const creditResponseJson = await creditResponse.json();
+
         if (creditResponseJson) {
-            setCastData(creditResponseJson.cast.slice(0, 50));
-            setCrewData(creditResponseJson.crew.slice(0, 50))
+            setCastData(creditResponseJson.cast.slice(0));
+            setCrewData(creditResponseJson.crew.slice(0));
         }
     }
 
@@ -101,7 +99,7 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
             TMDbIdKeyword({ id, movie, tv }, { signal: abortCont.signal });
             TMDbIdVideo({ id, movie, tv }, { signal: abortCont.signal });
             TMDbIdRec({ id, movie, tv }, { signal: abortCont.signal });
-            TMDbIdData({ id, movie, tv, person }, { signal: abortCont.signal }); 
+            TMDbIdData({ id, movie, tv, person }, { signal: abortCont.signal });
         }
         return () => { return abortCont.abort() };
     }, [id])

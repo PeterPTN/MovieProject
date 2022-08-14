@@ -30,6 +30,7 @@ export const DisplayVidImgsContainer = styled.div`
     @media screen and (max-width: 1000px) {
         flex-direction: column;
         height: auto;
+        margin: 0;
 
         img {
            display: none; 
@@ -135,6 +136,7 @@ export const DisplayTitleContainer = styled.div`
             text-align: center;
             width: 3.5rem;
             margin: 0;
+            margin-bottom: .5rem;
         }
     }
 `
