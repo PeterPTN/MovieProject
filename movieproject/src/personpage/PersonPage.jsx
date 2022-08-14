@@ -48,7 +48,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   const { convertedDate } = useDateConversion({ rawDate });
 
   //console.log("media", mediaData)
-  console.log("cast", castData)
+  //console.log("cast", castData)
 
   function handleClick() {
     showText === "hide" ? setShowText("show") : setShowText("hide");

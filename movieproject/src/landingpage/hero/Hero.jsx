@@ -36,7 +36,6 @@ const Hero = ({ TraktDeets, TMDb, trailerType, setTrailerType }) => {
                                 <h2>Trending</h2>
                                 <iframe src={trailerLink}
                                     frameBorder="0" title="YouTube video player"
-                                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen />
                             </>}
                     </TrailerView>

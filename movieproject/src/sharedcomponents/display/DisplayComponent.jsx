@@ -55,7 +55,6 @@ const DisplayComponent = ({ mediaData, videoData, TraktDeets, movie, keywordData
         <VidContainer>
           {videoData.results.length > 0 ?
             <iframe src={youtubePrefix + videoData.results[index].key} frameBorder="0" title="YouTube video player"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen />
             : <div className="novid"><h3>No videos available</h3></div>}
 
