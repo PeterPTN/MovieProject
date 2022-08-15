@@ -70,7 +70,7 @@ const useTraktFetch = ({ trailerType, TMDb, TraktDeets, trending, popular, antic
         let TMDbType = "";
         type === "movie" ? TMDbType = "movie" : TMDbType = "tv";
 
-        //What the hell does this do
+        //Promise.all collects all 'return poster' from array.map in an array
         const arrayImages = await Promise.all(ids.map(async (id) => {
             const configResponse = await fetch(`https://api.themoviedb.org/3/configuration?api_key=${TMDb.key}`)
             const configJson = await configResponse.json();

@@ -20,8 +20,8 @@ import useDateConversion from "../sharedcomponents/useDateConversion"
 import fourohfour from "../images/404.png"
 
 const PersonPage = ({ TMDb, setTrailerType }) => {
-  //Not using states cause of Date Conversion re-renders with rawDate change
-  //rawDate will go from undefined to keyed value infinitely
+  //Not using states cause of useDateConversion re-renders with rawDate change
+
   const [showText, setShowText] = useState("hide")
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const person = "person";
@@ -29,7 +29,6 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   let firstCreditHalf;
   let secCreditHalf;
   let rawDate;
-  const delay = (ms = 1000) => new Promise(r => setTimeout(r, ms));
 
   const { id } = useParams();
   const { mediaData, castData, isPending } = useTMDbIDSearch({ id, person, TMDb });
@@ -112,6 +111,8 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
               <Discography>
                 <DiscographyCard>
                   {firstCreditHalf.map((item, index) => {
+                    //array.map causing 429 due to image src/tmdb-api being called faster than 50 times a second
+                    //Currently unable to design a solution to delay each iteration of array.map 
                     function imagePath() {
                       if (item.poster_path == null || item.poster_path == undefined) {
                         return imageNotFound;

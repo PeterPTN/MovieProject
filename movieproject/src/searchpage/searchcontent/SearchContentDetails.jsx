@@ -30,6 +30,8 @@ const SearchContentDetails = ({ data, index, searchImages, filter }) => {
         department = data.known_for_department + " | Known for: ";
     }
 
+    //filter is set by Header component
+    //filterType determines part of the url slug which allows for routes
     if (filter === "multi") {
         if (data.media_type) {
             filterType = data.media_type;

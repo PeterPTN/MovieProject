@@ -22,6 +22,7 @@ const MoviePage = ({ TMDb, TraktDeets, setTrailerType }) => {
     //console.log("video",videoData);
 
     useEffect(() => {
+        //Component re-render moves view to the top
         setTimeout(window.scroll(0, 0), 1000)
         setTrailerType("details");
     }, [id])

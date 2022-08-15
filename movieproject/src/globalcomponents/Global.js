@@ -7,9 +7,6 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   font-size: 1rem;
   font-family: var(--body), Arial, Helvetica, sans-serif;
-  --small404: "https://i.stack.imgur.com/6M513.png";
-  --big404: red;
-  
   --body: 'Oswald', sans-serif;
 }
 
@@ -20,7 +17,23 @@ export const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   list-style: none;  
- 
+}
+
+::-webkit-scrollbar {
+  width: .9rem;
+  height: .9rem;
+}
+
+::-webkit-scrollbar {
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: silver;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
 }
 
 h2 {

@@ -6,7 +6,7 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     const [crewData, setCrewData] = useState([]);
     const [keywordData, setKeywordData] = useState([]);
     const [videoData, setVideoData] = useState([]);
-    const [recData, setRecData] = useState([]);
+    //const [recData, setRecData] = useState([]);
     const [isPending, setIsPending] = useState(null);
     const abortCont = new AbortController();
 
@@ -35,9 +35,11 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         } else if (person) {
             creditUrl = `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${TMDb.key}`;
         }
+        //429 error isn't happening here - headers will remain for future reference
         const creditResponse = await fetch(creditUrl, { headers: { "Retry-After": 1 } });
         const creditResponseJson = await creditResponse.json();
 
+        //Limiting array items to prevent 429 errors
         if (creditResponseJson) {
             setCastData(creditResponseJson.cast.slice(0, 17));
             setCrewData(creditResponseJson.crew.slice(0, 17));
@@ -73,6 +75,9 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         }
     }
 
+    //Recommended component - currently unused
+
+    /*
     async function TMDbIdRec({ id, movie, tv }) {
         let recUrl;
         if (movie) {
@@ -87,7 +92,7 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
             setRecData(recResponseJson);
         }
     }
-
+    */
 
     useEffect(() => {
         setIsPending(true);
@@ -105,7 +110,7 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     }, [id])
 
     return (
-        { mediaData, castData, crewData, keywordData, videoData, recData, isPending }
+        { mediaData, castData, crewData, keywordData, videoData, /*recData, */ isPending }
     )
 }
 
