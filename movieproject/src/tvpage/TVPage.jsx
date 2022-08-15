@@ -35,7 +35,7 @@ const TVPage = ({ TMDb, TraktDeets, setTrailerType }) => {
             </TVContainer>
         </TVWrapper>
         )
-    } else if (mediaData && crewData && castData && keywordData && videoData.results && recData) {
+    } else if (mediaData && crewData && castData && keywordData && videoData.results) {
         return (
             <TVWrapper>
                 <TVContainer>

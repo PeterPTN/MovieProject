@@ -6,7 +6,7 @@ export const ContentWrapper = styled.div`
     display: flex;
     background-color: #EEEEEE;
     opacity: 1;
-    height: 84rem;
+    height: 86.5rem;
     background-image:  linear-gradient(#DADADA 2.2px, transparent 2.2px), linear-gradient(90deg, #DADADA 2.2px, transparent 2.2px), linear-gradient(#DADADA 1.1px, transparent 1.1px), linear-gradient(90deg, #DADADA 1.1px, #EEEEEE 1.1px);
     background-size: 55px 55px, 55px 55px, 11px 11px, 11px 11px;
     background-position: -2.2px -2.2px, -2.2px -2.2px, -1.1px -1.1px, -1.1px -1.1px;
@@ -16,7 +16,7 @@ export const ContentWrapper = styled.div`
     }
 
     @media screen and (max-width: 500px) {
-        height: 83.5rem;  
+        height: 85.5rem;  
     }
 `
 
@@ -92,7 +92,8 @@ export const ContentInfo = styled.div`
     padding: .5rem;
     background-color: white;
 
-    h3 {
+
+    h4 {
         font-size: 1rem;
     }
 
@@ -103,6 +104,7 @@ export const ContentInfo = styled.div`
         text-align: center;
         display: inline-block;
         background-color: #ff7600;
-        color: white;  
+        color: white; 
+         
     }
 `

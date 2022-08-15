@@ -37,7 +37,7 @@ const MoviePage = ({ TMDb, TraktDeets, setTrailerType }) => {
                 </MovieContainer>
             </MovieWrapper>
         )
-    } else if (mediaData && crewData && castData && keywordData && videoData.results && recData) {
+    } else if (mediaData && crewData && castData && keywordData && videoData.results) {
         return (
             <MovieWrapper className="padding">
                 <MovieContainer>
