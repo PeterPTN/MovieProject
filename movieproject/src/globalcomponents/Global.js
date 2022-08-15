@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 //Global styling
 export const GlobalStyles = createGlobalStyle`
     /* Global CSS styles */
-::root {
+:root {
   box-sizing: border-box;
   font-size: 1rem;
   font-family: var(--body), Arial, Helvetica, sans-serif;
