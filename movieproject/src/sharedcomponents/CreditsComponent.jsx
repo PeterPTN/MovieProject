@@ -54,7 +54,6 @@ const CreditsComponent = ({ castData }) => {
             <CastCrewWrapper>
                 {castData && castData.map((data, index) => {
                     function imagePath() {
-                        setTimeout(() => { }, 100)
                         if (data.profile_path) {
                             return imagePrefix + data.profile_path;
                         } else {
@@ -62,12 +61,10 @@ const CreditsComponent = ({ castData }) => {
                         }
                     }
 
-                    const path = imagePath();
-
                     return (
                         <CastCrewContainer key={index}>
                             <Link to={`/person/${data.id}`}>
-                                <img src={path} alt={data.original_name + " headshot"} />
+                                <img src={imagePath()} alt={data.original_name + " headshot"} />
                             </Link>
                             <h3>{data.original_name}</h3>
                             <h4>{data.character}</h4>

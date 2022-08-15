@@ -39,8 +39,8 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         const creditResponseJson = await creditResponse.json();
 
         if (creditResponseJson) {
-            setCastData(creditResponseJson.cast.slice(0));
-            setCrewData(creditResponseJson.crew.slice(0));
+            setCastData(creditResponseJson.cast.slice(0, 17));
+            setCrewData(creditResponseJson.crew.slice(0, 17));
             setIsPending(false);
         }
     }

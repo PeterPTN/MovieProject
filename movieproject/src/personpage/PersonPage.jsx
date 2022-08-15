@@ -29,6 +29,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   let firstCreditHalf;
   let secCreditHalf;
   let rawDate;
+  const delay = (ms = 1000) => new Promise(r => setTimeout(r, ms));
 
   const { id } = useParams();
   const { mediaData, castData, isPending } = useTMDbIDSearch({ id, person, TMDb });
@@ -111,10 +112,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
               <Discography>
                 <DiscographyCard>
                   {firstCreditHalf.map((item, index) => {
-                    //console.log(item);
                     function imagePath() {
-                      //Settimeout to prevent 429 requests
-                      setTimeout(() => { }, 100);
                       if (item.poster_path == null || item.poster_path == undefined) {
                         return imageNotFound;
                       } else {
@@ -122,11 +120,9 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                       }
                     }
 
-                    const path = imagePath();
-
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={path} alt={item.name ? item.name : item.original_title + " poster"} />
+                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
@@ -135,9 +131,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
                 <DiscographyCard>
                   {secCreditHalf.map((item, index) => {
-                    //console.log(item);
                     function imagePath() {
-                      setTimeout(() => { }, 100);
                       if (item.poster_path == null || item.poster_path == undefined) {
                         return imageNotFound;
                       } else {
@@ -145,11 +139,9 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                       }
                     }
 
-                    const path = imagePath();
-
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={path} alt={item.name ? item.name : item.original_title + " poster"} />
+                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
