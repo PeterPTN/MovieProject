@@ -17,6 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useTMDbIDSearch from "../useTMDbIDSearch";
 import useDateConversion from "../sharedcomponents/useDateConversion"
+import fourohfour from "../images/404.png"
 
 const PersonPage = ({ TMDb, setTrailerType }) => {
   //Not using states cause of Date Conversion re-renders with rawDate change
@@ -24,7 +25,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   const [showText, setShowText] = useState("hide")
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const person = "person";
-  const imageNotFound = "https://i.stack.imgur.com/6M513.png"
+  const imageNotFound = fourohfour;
   let firstCreditHalf;
   let secCreditHalf;
   let rawDate;
@@ -49,6 +50,8 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
   //console.log("media", mediaData)
   //console.log("cast", castData)
+  //console.log("first", firstCreditHalf);
+  //console.log("sec", secCreditHalf);
 
   function handleClick() {
     showText === "hide" ? setShowText("show") : setShowText("hide");
@@ -69,7 +72,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
         </PersonContainer>
       </PersonWrapper>
     )
-  } else if (mediaData.id == id && firstCreditHalf.length > 0 && secCreditHalf.length > 0) {
+  } else if (mediaData.id == id && firstCreditHalf && secCreditHalf) {
     return (
       <PersonWrapper className="padding">
         <PersonContainer>
@@ -98,7 +101,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
           <PersonDisplay>
             <HeadShot>
-          
+
               <img src={mediaData.profile_path ? imagePrefix + mediaData.profile_path : imageNotFound} />
             </HeadShot>
 
@@ -109,12 +112,18 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                 <DiscographyCard>
                   {firstCreditHalf.map((item, index) => {
                     //console.log(item);
-                    let path;
-                    if (item.poster_path === null || item.poster_path === undefined) {
-                      path = imageNotFound;
-                    } else {
-                      path = imagePrefix + item.poster_path;
+                    function imagePath() {
+                      //Settimeout to prevent 429 requests
+                      setTimeout(() => { }, 100);
+                      if (item.poster_path == null || item.poster_path == undefined) {
+                        return imageNotFound;
+                      } else {
+                        return imagePrefix + item.poster_path;
+                      }
                     }
+
+                    const path = imagePath();
+
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
                         <img src={path} alt={item.name ? item.name : item.original_title + " poster"} />
@@ -127,12 +136,17 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                 <DiscographyCard>
                   {secCreditHalf.map((item, index) => {
                     //console.log(item);
-                    let path;
-                    if (item.poster_path == null || item.poster_path == undefined) {
-                      path = imageNotFound;
-                    } else {
-                      path = imagePrefix + item.poster_path;
+                    function imagePath() {
+                      setTimeout(() => { }, 100);
+                      if (item.poster_path == null || item.poster_path == undefined) {
+                        return imageNotFound;
+                      } else {
+                        return imagePrefix + item.poster_path;
+                      }
                     }
+
+                    const path = imagePath();
+
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
                         <img src={path} alt={item.name ? item.name : item.original_title + " poster"} />

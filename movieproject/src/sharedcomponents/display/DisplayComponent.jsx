@@ -8,12 +8,13 @@ import {
 } from "./Display.styled";
 
 import KeywordComponent from "../KeywordComponent";
-
+import fourohfour from "../../images/404.png"
 import useTraktFull from "../useTraktFull"
+
 
 const DisplayComponent = ({ mediaData, videoData, TraktDeets, movie, keywordData }) => {
   const [index, setIndex] = useState(0);
-  const imageNotFound = "https://i.stack.imgur.com/6M513.png"
+  const imageNotFound = fourohfour;
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const youtubePrefix = "https://www.youtube.com/embed/";
   let ratingColor;

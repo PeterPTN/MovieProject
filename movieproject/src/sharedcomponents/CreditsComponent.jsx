@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import fourohfour from "../images/404.png"
 
 const CreditsWrapper = styled.div`
     margin: 1.25rem .5rem;
@@ -52,12 +53,21 @@ const CreditsComponent = ({ castData }) => {
             <h2>Cast</h2>
             <CastCrewWrapper>
                 {castData && castData.map((data, index) => {
-                    let imageUrl;
-                    data.profile_path ? imageUrl = imagePrefix + data.profile_path : imageUrl = "https://i.stack.imgur.com/6M513.png";
+                    function imagePath() {
+                        setTimeout(() => { }, 100)
+                        if (data.profile_path) {
+                            return imagePrefix + data.profile_path;
+                        } else {
+                            return fourohfour;
+                        }
+                    }
+
+                    const path = imagePath();
+
                     return (
                         <CastCrewContainer key={index}>
                             <Link to={`/person/${data.id}`}>
-                                <img src={imageUrl} alt={data.original_name + " headshot"} />
+                                <img src={path} alt={data.original_name + " headshot"} />
                             </Link>
                             <h3>{data.original_name}</h3>
                             <h4>{data.character}</h4>

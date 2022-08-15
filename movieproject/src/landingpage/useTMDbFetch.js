@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import fourohfour from "../images/404.png"
 
 const useTMDbFetch = ({ TMDb, top, trailerType }) => {
     const [mediaData, setMediaData] = useState([]);
@@ -33,7 +34,7 @@ const useTMDbFetch = ({ TMDb, top, trailerType }) => {
             const imagePrefix = configJson.images.secure_base_url;
             //console.log(film)
 
-            let poster = "https://i.stack.imgur.com/6M513.png";
+            let poster = fourohfour;
 
             //Movies & Shows
             if (film.poster_path) {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import fourohfour from "../images/404.png"
 
 const useTraktFetch = ({ trailerType, TMDb, TraktDeets, trending, popular, anticipated }) => {
     const [trailerLink, setTrailerLink] = useState("");
@@ -77,7 +78,7 @@ const useTraktFetch = ({ trailerType, TMDb, TraktDeets, trending, popular, antic
 
             let imageResponse = await fetch(`https://api.themoviedb.org/3/${TMDbType}/${id}/images?api_key=${TMDb.key}`)
             let imageJson = await imageResponse.json();
-            let poster = "https://i.stack.imgur.com/6M513.png";
+            let poster = fourohfour;
             //console.log(imageJson);
 
             //Film

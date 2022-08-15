@@ -23,7 +23,6 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         const idResponseJson = await idResponse.json();
         if (idResponseJson) {
             setMediaData(idResponseJson);
-            setIsPending(false);
         }
     }
 
@@ -36,12 +35,13 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         } else if (person) {
             creditUrl = `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${TMDb.key}`;
         }
-        const creditResponse = await fetch(creditUrl, { "Retry-After": 1 });
+        const creditResponse = await fetch(creditUrl, { headers: { "Retry-After": 1 } });
         const creditResponseJson = await creditResponse.json();
 
         if (creditResponseJson) {
             setCastData(creditResponseJson.cast.slice(0));
             setCrewData(creditResponseJson.crew.slice(0));
+            setIsPending(false);
         }
     }
 
@@ -92,14 +92,14 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
     useEffect(() => {
         setIsPending(true);
         if (person) {
-            TMDbIdCredit({ id, movie, tv, person }, { signal: abortCont.signal });
             TMDbIdData({ id, movie, tv, person }, { signal: abortCont.signal });
+            TMDbIdCredit({ id, movie, tv, person }, { signal: abortCont.signal });
         } else if (movie || tv) {
-            TMDbIdCredit({ id, movie, tv, person }, { signal: abortCont.signal });
-            TMDbIdKeyword({ id, movie, tv }, { signal: abortCont.signal });
-            TMDbIdVideo({ id, movie, tv }, { signal: abortCont.signal });
-            TMDbIdRec({ id, movie, tv }, { signal: abortCont.signal });
             TMDbIdData({ id, movie, tv, person }, { signal: abortCont.signal });
+            TMDbIdVideo({ id, movie, tv }, { signal: abortCont.signal });
+            TMDbIdKeyword({ id, movie, tv }, { signal: abortCont.signal });
+            TMDbIdCredit({ id, movie, tv, person }, { signal: abortCont.signal });
+            //TMDbIdRec({ id, movie, tv }, { signal: abortCont.signal });
         }
         return () => { return abortCont.abort() };
     }, [id])
