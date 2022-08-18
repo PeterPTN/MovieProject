@@ -20,14 +20,14 @@ import useDateConversion from "../sharedcomponents/useDateConversion"
 import fourohfour from "../images/404.png"
 
 const PersonPage = ({ TMDb, setTrailerType }) => {
-  //Not using states cause of useDateConversion re-renders with rawDate change
 
-  const [showText, setShowText] = useState("hide")
+  //Not using states cause of useDateConversion re-renders with rawDate change
+  const [showText, setShowText] = useState("hide");
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const person = "person";
   const imageNotFound = fourohfour;
-  let firstCreditHalf;
-  let secCreditHalf;
+  let firstCreditHalf = new Array;
+  let secCreditHalf = new Array;
   let rawDate;
 
   const { id } = useParams();
@@ -72,7 +72,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
         </PersonContainer>
       </PersonWrapper>
     )
-  } else if (mediaData.id == id && firstCreditHalf && secCreditHalf) {
+  } else if (mediaData.id == id) {
     return (
       <PersonWrapper className="padding">
         <PersonContainer>
@@ -110,7 +110,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
               <Discography>
                 <DiscographyCard>
-                  {firstCreditHalf.map((item, index) => {
+                  {firstCreditHalf.length > 0 ? firstCreditHalf.map((item, index) => {
                     //array.map causing 429 due to image src/tmdb-api being called faster than 50 times a second
                     //Currently unable to design a solution to delay each iteration of array.map 
                     function imagePath() {
@@ -127,11 +127,16 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
-                  })}
+                  })
+                    :
+                    <div>
+                      <h3 className="empty" >Nothing to display</h3>
+                    </div>}
+
                 </DiscographyCard>
 
                 <DiscographyCard>
-                  {secCreditHalf.map((item, index) => {
+                  {secCreditHalf.length > 0 ? secCreditHalf.map((item, index) => {
                     function imagePath() {
                       if (item.poster_path == null || item.poster_path == undefined) {
                         return imageNotFound;
@@ -146,7 +151,12 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
-                  })}
+                  })
+                    :
+                    <div>
+                      <h3></h3>
+                    </div>
+                  }
                 </DiscographyCard>
               </Discography>
 

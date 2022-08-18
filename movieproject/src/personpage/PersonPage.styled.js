@@ -73,7 +73,7 @@ export const PersonInfo = styled.div`
 
     @media screen and (max-width: 630px) {
         button {
-            bottom: -2.45rem;
+            bottom: -2.4rem;
             width: 5.75rem;
         }
     }
@@ -147,11 +147,9 @@ export const HeadShot = styled.div`
     height: 45.75rem;
 
      img {
-        border: .5rem solid white;
         border-right: none;
         border-left: none;
         height: 30rem;
-        
     }
 
     @media screen and (max-width: 1000px) {
@@ -221,6 +219,13 @@ export const DiscographyCard = styled.div`
     display: flex;
     flex-direction: row;
     column-gap: .5rem;
+    height: 100%;
+    background-color: whitesmoke;
+
+    .empty {
+            margin: 0 .5rem;
+            font-size: 1.5rem;
+        }
 
     a {
         text-decoration: none;
@@ -232,7 +237,6 @@ export const DiscographyCard = styled.div`
         img {
             //Crap exact values
             min-width: 11rem;
-            max-width: 11rem;
             min-height: 15rem;
             max-height: 15rem;
             object-fit: fill;
@@ -250,6 +254,7 @@ export const DiscographyCard = styled.div`
             -webkit-box-orient: vertical;  
             overflow: hidden;
         }
+
 
         p {
             padding-bottom: .15rem;
