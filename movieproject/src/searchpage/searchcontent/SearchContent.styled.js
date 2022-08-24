@@ -41,6 +41,11 @@ export const SearchContentContainer = styled.div`
         row-gap: 1rem;
         padding: 0 0 1rem 0;
     }
+
+    @media screen and (min-width: 2000px) {
+        width: 1800px;
+        margin: auto;
+    }
 `
 
 export const TempDisplay = styled.div`

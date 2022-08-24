@@ -1,23 +1,15 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 export const ContentWrapper = styled.div`
     width: 100%;
     display: flex;
     background-color: #EEEEEE;
     opacity: 1;
-    height: 86.5rem;
     background-image:  linear-gradient(#DADADA 2.2px, transparent 2.2px), linear-gradient(90deg, #DADADA 2.2px, transparent 2.2px), linear-gradient(#DADADA 1.1px, transparent 1.1px), linear-gradient(90deg, #DADADA 1.1px, #EEEEEE 1.1px);
     background-size: 55px 55px, 55px 55px, 11px 11px, 11px 11px;
     background-position: -2.2px -2.2px, -2.2px -2.2px, -1.1px -1.1px, -1.1px -1.1px;
-
-    @media screen and (max-width: 800px) {
-        height: 88.5rem;
-    }
-
-    @media screen and (max-width: 500px) {
-        height: 85.5rem;  
-    }
 `
 
 export const ContentContainer = styled.div`
@@ -39,7 +31,6 @@ export const ContentCardWrapper = styled.div`
     h4 {
         margin: .25rem 0;
         width: 10rem;
-        position: relative;
     }
 
 
@@ -49,6 +40,12 @@ export const ContentCardWrapper = styled.div`
 
     @media screen and (max-width: 500px) {
             margin-top: 2rem;  
+    }
+
+    @media screen and (min-width: 2000px) {
+       h3 {
+        text-align: center;
+       }
     }
 `
 
@@ -60,25 +57,27 @@ export const ContentCardContainer = styled.div`
     column-gap: .5rem;
     align-items: stretch;
     background-color: #eee;
-    height: 21.75rem;
+
+    @media screen and (min-width: 2000px) {
+        margin: auto;
+        width: 1800px;
+    }
 `
 
 export const ContentCard = styled(Link)`
-    display: inline-block;
+    display: flex;
     cursor: pointer;
     background-color: white;
     text-decoration: none;
     color: black;
     text-align: center;
+    flex-direction: column; 
 
-    h3 {
-        width: 10rem;
-        position: relative;
-    }
+  
 `
 
 export const ContentPicture = styled.div`
-        height: 15rem;
+    height: 15.5rem;
 
         img {
             height: 100%;

@@ -26,6 +26,11 @@ export const PersonContainer = styled.div`
             color: ${({ theme }) => theme.colors.navy};
         }
     }
+
+    @media screen and (min-width: 2000px) {
+        width: 1800px;
+        margin: auto;
+    }
 `
 
 export const PersonInfo = styled.div`

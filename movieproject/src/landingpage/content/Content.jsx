@@ -31,12 +31,16 @@ const Content = ({ trailerType, TraktDeets, TMDb }) => {
                     </ContentCardContainer>
                 </ContentCardWrapper>
 
+                {/* Commented out to prevent 429 error - APi limitation
+
                 <ContentCardWrapper>
                     <h3>Top-Rated</h3>
                     <ContentCardContainer  >
                         <ContentTop TraktDeets={TraktDeets} TMDb={TMDb} trailerType={trailerType} />
                     </ContentCardContainer>
-                </ContentCardWrapper>
+                </ContentCardWrapper> 
+                
+                */}
 
             </ContentContainer>
         </ContentWrapper>

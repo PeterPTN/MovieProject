@@ -25,12 +25,19 @@ export const HeroWrapper = styled.div`
     @media screen and (max-width: 500px) {
         padding: 9rem 1rem 0rem;
     }
+
+    
 `
 
 export const HeroContainer = styled.div`
     width: 100%;
     position: relative;
     background-color: #eee;
+
+    @media screen and (min-width: 2000px) {
+        margin: auto;
+        width: 1800px;
+    }
 `
 
 export const HeroDisplayContainer = styled.div`
@@ -45,6 +52,8 @@ export const HeroDisplayContainer = styled.div`
     @media screen and (max-width: 800px) {
         height: 42rem;
     }
+
+    
 `
 
 export const TrailerView = styled.div`
