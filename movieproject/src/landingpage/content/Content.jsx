@@ -31,8 +31,7 @@ const Content = ({ trailerType, TraktDeets, TMDb }) => {
                     </ContentCardContainer>
                 </ContentCardWrapper>
 
-                {/* Commented out to prevent 429 error - APi limitation
-
+               
                 <ContentCardWrapper>
                     <h3>Top-Rated</h3>
                     <ContentCardContainer  >
@@ -40,7 +39,7 @@ const Content = ({ trailerType, TraktDeets, TMDb }) => {
                     </ContentCardContainer>
                 </ContentCardWrapper> 
                 
-                */}
+                
 
             </ContentContainer>
         </ContentWrapper>

@@ -64,7 +64,7 @@ const CreditsComponent = ({ castData }) => {
                     return (
                         <CastCrewContainer key={index}>
                             <Link to={`/person/${data.id}`}>
-                                <img src={imagePath()} alt={data.original_name + " headshot"} />
+                                <img src={imagePath()} alt={data.original_name + " headshot"} loading="lazy"/>
                             </Link>
                             <h3>{data.original_name}</h3>
                             <h4>{data.character}</h4>

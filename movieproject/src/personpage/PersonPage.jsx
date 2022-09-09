@@ -21,7 +21,6 @@ import fourohfour from "../images/404.png"
 
 const PersonPage = ({ TMDb, setTrailerType }) => {
 
-  //Not using states cause of useDateConversion re-renders with rawDate change
   const [showText, setShowText] = useState("hide");
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const person = "person";
@@ -29,7 +28,6 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   let firstCreditHalf = new Array;
   let secCreditHalf = new Array;
   let rawDate;
-
   const { id } = useParams();
   const { mediaData, castData, isPending } = useTMDbIDSearch({ id, person, TMDb });
 
@@ -58,7 +56,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
   }
 
   useEffect(() => {
-    setTimeout(window.scroll(0, 0), 1000)
+    setTimeout(window.scroll(0, 0), 1000);
     setTrailerType("details");
   }, [id])
 
@@ -117,13 +115,14 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
                       if (item.poster_path == null || item.poster_path == undefined) {
                         return imageNotFound;
                       } else {
-                        return imagePrefix + item.poster_path;
+                        return imagePrefix + item.poster_path
                       }
                     }
 
+
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} />
+                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} loading="lazy" />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
@@ -147,7 +146,7 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} />
+                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} loading="lazy" />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)

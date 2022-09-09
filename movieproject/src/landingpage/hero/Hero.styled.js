@@ -41,25 +41,18 @@ export const HeroContainer = styled.div`
 `
 
 export const HeroDisplayContainer = styled.div`
-    height: 44rem;
     display: flex;
         
     @media screen and (max-width: 1500px) {
         flex-direction: column;
-        height: 51rem;
-    }
-
-    @media screen and (max-width: 800px) {
-        height: 42rem;
-    }
-
-    
+    }  
 `
 
 export const TrailerView = styled.div`
     display: flex;
     flex-direction: column;
     flex: 3.25;
+    height: 44rem;
 
         h2 {
             background-color: black;
@@ -72,6 +65,11 @@ export const TrailerView = styled.div`
             flex: 1;
             background-color: white;
         }
+
+    @media screen and (max-width: 1500px) {
+        height: 40rem;
+        flex: none;
+    }  
   
 `
 
@@ -82,6 +80,7 @@ export const HeroCard = styled.div`
     flex-direction: column;
     row-gap: .5rem;
     margin-left: .5rem;
+    height: 44rem;
   
     @media screen and (max-width: 1500px) {
         flex: 1.1;
@@ -90,11 +89,11 @@ export const HeroCard = styled.div`
         overflow-y: hidden;
         margin-top: .5rem;
         column-gap: .5rem;
+        height: 10rem;
     }
 
     @media screen and (max-width: 800px) {
-        margin-top: 0;
-        flex: 1;
+        height: 8rem;
     }
 
 `
@@ -120,12 +119,7 @@ export const HeroDisplay = styled.div`
         max-width: 20rem;
     }
 
-    @media screen and (max-width: 800px) {
-        img {
-            width: 6.5rem;
-            height: 10rem;
-        }
-    }
+
 
 `
 
@@ -142,7 +136,6 @@ export const HeroInfo = styled.div`
   
     h3 {
         font-size: 1rem;
-        
     }
 
     p {

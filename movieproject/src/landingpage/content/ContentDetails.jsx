@@ -33,9 +33,9 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
     //TV Anticipated - Movie Anticipated
     if (data[mediaType]) {
         return (
-            <ContentCard to={`/${topRatedType}/${data[mediaType].ids.tmdb}`} key={index}>
+            <ContentCard to={`/${topRatedType}/${data[mediaType].ids.tmdb}`} >
                 <ContentPicture>
-                    <img alt={data[mediaType].title + " poster"} src={mediaPic[index]} />
+                    <img alt={data[mediaType].title + " poster"} src={mediaPic[index]} loading="lazy"/>
                 </ContentPicture>
 
                 <ContentInfo>
@@ -51,9 +51,9 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
         data.title ? title = data.title : title = data.original_name;
 
         return (
-            <ContentCard to={`/${topRatedType}/${data.id}`} key={index}>
+            <ContentCard to={`/${topRatedType}/${data.id}`} >
                 <ContentPicture>
-                    <img alt={data.title + " poster"} src={mediaPic[index]} />
+                    <img alt={data.title + " poster"} src={mediaPic[index]} loading="lazy"/>
                 </ContentPicture>
 
                 <ContentInfo>
@@ -66,9 +66,9 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
     //TV Popular - Movie Popular
     else {
         return (
-            <ContentCard to={`/${topRatedType}/${data.ids.tmdb}`} key={index}>
+            <ContentCard to={`/${topRatedType}/${data.ids.tmdb}`}>
                 <ContentPicture>
-                    <img alt={data.title + " poster"} src={mediaPic[index]} />
+                    <img alt={data.title + " poster"} src={mediaPic[index]} loading="lazy"/>
                 </ContentPicture>
 
                 <ContentInfo>
