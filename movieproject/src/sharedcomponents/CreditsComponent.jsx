@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fourohfour from "../images/404.png"
+import { useState, useEffect, useCallback } from 'react';
 
 const CreditsWrapper = styled.div`
     margin: 1.25rem .5rem;
@@ -46,25 +47,36 @@ const CastCrewContainer = styled.div`
 `
 
 const CreditsComponent = ({ castData }) => {
+    const [array, setArray] = useState([]);
     const imagePrefix = "https://image.tmdb.org/t/p/w500";
+
+    useEffect(() => {
+        if (array.length === 0) {
+            castData.map((item, index) => setTimeout(() => {
+                if (item.profile_path) {
+                    setArray((v) => [...v, imagePrefix + item.profile_path])
+                } else {
+                    setArray((v) => [...v, fourohfour])
+                }
+            }
+                , 55 * index))
+        }
+
+    }, [castData])
+
+    const handleRender = useCallback((index) => {
+        return array[index];
+    })
 
     return (
         <CreditsWrapper>
             <h2>Cast</h2>
             <CastCrewWrapper>
                 {castData && castData.map((data, index) => {
-                    function imagePath() {
-                        if (data.profile_path) {
-                            return imagePrefix + data.profile_path;
-                        } else {
-                            return fourohfour;
-                        }
-                    }
-
                     return (
                         <CastCrewContainer key={index}>
                             <Link to={`/person/${data.id}`}>
-                                <img src={imagePath()} alt={data.original_name + " headshot"} loading="lazy"/>
+                                <img src={handleRender(index)} alt={data.original_name + " headshot"} loading="lazy" />
                             </Link>
                             <h3>{data.original_name}</h3>
                             <h4>{data.character}</h4>

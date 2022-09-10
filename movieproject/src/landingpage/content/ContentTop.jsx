@@ -12,7 +12,7 @@ const ContentTop = ({ trailerType, TMDb }) => {
                     if (mediaData[0] && mediaPic[0]) {
                         return (
                             <ContentDetails key={1 + index} data={film} index={index}
-                                mediaPic={mediaPic} trailerType={trailerType} />
+                                mediaPic={mediaPic} trailerType={trailerType} top={true} />
                         )
                     }
                 })
@@ -24,7 +24,7 @@ const ContentTop = ({ trailerType, TMDb }) => {
 
                         return (
                             <ContentDetails key={index} data={film} index={index}
-                                mediaPic={mediaPic} trailerType={trailerType} />
+                                mediaPic={mediaPic} trailerType={trailerType} top={true}/>
                         )
                     }
                 })

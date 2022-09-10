@@ -11,10 +11,8 @@ const ContentPopular = ({ trailerType, TraktDeets, TMDb }) => {
         mediaData.map((film, index) => {
           if (mediaData[0]) {
             return (
-            
-                <ContentDetails key={index + film.title} data={film} index={index}
-                  mediaPic={mediaPic} trailerType={trailerType} />
-              
+              <ContentDetails key={index + film.title} data={film} index={index}
+                mediaPic={mediaPic} trailerType={trailerType} popular={true} />
             )
           }
         })
@@ -25,7 +23,7 @@ const ContentPopular = ({ trailerType, TraktDeets, TMDb }) => {
           if (mediaData[0]) {
             return (
               <ContentDetails key={film + film.title} data={film} index={index}
-                mediaPic={mediaPic} trailerType={trailerType} />
+                mediaPic={mediaPic} trailerType={trailerType} popular={true} />
             )
           }
         })

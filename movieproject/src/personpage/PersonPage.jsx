@@ -14,51 +14,82 @@ import {
 } from "./PersonPage.styled";
 
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import useTMDbIDSearch from "../useTMDbIDSearch";
 import useDateConversion from "../sharedcomponents/useDateConversion"
 import fourohfour from "../images/404.png"
 
 const PersonPage = ({ TMDb, setTrailerType }) => {
-
+  const [arrayOne, setArrayOne] = useState([]);
+  const [arrayTwo, setArrayTwo] = useState([]);
+  const [firstCreditHalf, setFirstCreditHalf] = useState([]);
+  const [secCreditHalf, setSecCreditHalf] = useState([]);
   const [showText, setShowText] = useState("hide");
+  const rawDate = useRef(undefined);
+
   const imagePrefix = "https://image.tmdb.org/t/p/w500";
   const person = "person";
   const imageNotFound = fourohfour;
-  let firstCreditHalf = new Array;
-  let secCreditHalf = new Array;
-  let rawDate;
   const { id } = useParams();
   const { mediaData, castData, isPending } = useTMDbIDSearch({ id, person, TMDb });
 
-  if (castData.length > 0) {
-    firstCreditHalf = castData.slice(0, castData.length / 2)
-    secCreditHalf = castData.slice(castData.length / 2 + 1);
+  if (castData.length > 0 && secCreditHalf.length === 0 && firstCreditHalf.length === 0) {
+    setFirstCreditHalf(castData.slice(0, castData.length / 2));
+    setSecCreditHalf(castData.slice(castData.length / 2 + 1));
   }
 
-  if (mediaData.birthday !== undefined || mediaData.birthday !== null) {
-    rawDate = mediaData.birthday;
-  } else {
-    rawDate = undefined;
+  if (mediaData.birthday !== undefined && mediaData.birthday !== null && rawDate.current === undefined) {
+    rawDate.current = mediaData.birthday;
+    //console.log(mediaData.birthday);
   }
 
   //console.log(rawDate);
 
-  const { convertedDate } = useDateConversion({ rawDate });
+  const { convertedDate } = useDateConversion({ rawDate: rawDate.current });
 
   //console.log("media", mediaData)
   //console.log("cast", castData)
   //console.log("first", firstCreditHalf);
   //console.log("sec", secCreditHalf);
 
-  function handleClick() {
+  const handleClick = useCallback(() => {
     showText === "hide" ? setShowText("show") : setShowText("hide");
-  }
+  })
 
   useEffect(() => {
-    setTimeout(window.scroll(0, 0), 1000);
     setTrailerType("details");
-  }, [id])
+
+    if (arrayOne.length === 0) {
+      firstCreditHalf.map((item, index) => setTimeout(() => {
+        if (item.poster_path == null || item.poster_path == undefined) {
+          setArrayOne((v) => [...v, imageNotFound])
+        } else {
+          setArrayOne((v) => [...v, imagePrefix + item.poster_path])
+        }
+      }
+        , 275 * index))
+    }
+
+    if (arrayTwo.length === 0) {
+      secCreditHalf.map((item, index) => setTimeout(() => {
+        if (item.poster_path == null || item.poster_path == undefined) {
+          setArrayTwo((v) => [...v, imageNotFound])
+        } else {
+          setArrayTwo((v) => [...v, imagePrefix + item.poster_path])
+        }
+      }
+        , 275 * index))
+    }
+
+  }, [id, firstCreditHalf, secCreditHalf])
+
+  const handleRenderOne = useCallback((index) => {
+    return arrayOne[index];
+  })
+
+  const handleRenderTwo = useCallback((index) => {
+    return arrayTwo[index];
+  })
 
   if (isPending) {
     return (
@@ -109,20 +140,9 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
               <Discography>
                 <DiscographyCard>
                   {firstCreditHalf.length > 0 ? firstCreditHalf.map((item, index) => {
-                    //array.map causing 429 due to image src/tmdb-api being called faster than 50 times a second
-                    //Currently unable to design a solution to delay each iteration of array.map 
-                    function imagePath() {
-                      if (item.poster_path == null || item.poster_path == undefined) {
-                        return imageNotFound;
-                      } else {
-                        return imagePrefix + item.poster_path
-                      }
-                    }
-
-
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} loading="lazy" />
+                        <img src={handleRenderOne(index)} alt={item.name ? item.name : item.original_title + " poster"} />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)
@@ -136,17 +156,9 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
                 <DiscographyCard>
                   {secCreditHalf.length > 0 ? secCreditHalf.map((item, index) => {
-                    function imagePath() {
-                      if (item.poster_path == null || item.poster_path == undefined) {
-                        return imageNotFound;
-                      } else {
-                        return imagePrefix + item.poster_path;
-                      }
-                    }
-
                     return (
                       <Link key={index + 2} to={`/${item.media_type}/${item.id}`}>
-                        <img src={imagePath()} alt={item.name ? item.name : item.original_title + " poster"} loading="lazy" />
+                        <img src={handleRenderTwo(index)} alt={item.name ? item.name : item.original_title + " poster"} />
                         <h3>{item.name ? item.name : item.original_title}</h3>
                         <p>{item.character}</p>
                       </Link>)

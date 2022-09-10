@@ -41,8 +41,8 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
 
         //Limiting array items to prevent 429 errors
         if (creditResponseJson) {
-            setCastData(creditResponseJson.cast.slice(0, 16));
-            setCrewData(creditResponseJson.crew.slice(0, 16));
+            setCastData(creditResponseJson.cast.slice(0));
+            setCrewData(creditResponseJson.crew.slice(0));
             setIsPending(false);
         }
     }

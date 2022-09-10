@@ -13,7 +13,7 @@ const ContentTrending = ({ trailerType, TraktDeets, TMDb }) => {
                     if (mediaData[0].movie) {
                         return (
                             <ContentDetails key={index + film.movie.title} data={film}
-                                mediaPic={mediaPic} trailerType={trailerType} index={index} />
+                                mediaPic={mediaPic} trailerType={trailerType} index={index} anti={true} />
                         )
                     }
                 })
@@ -24,7 +24,7 @@ const ContentTrending = ({ trailerType, TraktDeets, TMDb }) => {
                     if (mediaData[0].show) {
                         return (
                             <ContentDetails key={index + film.show.title} data={film}
-                                mediaPic={mediaPic} trailerType={trailerType} index={index} />)
+                                mediaPic={mediaPic} trailerType={trailerType} index={index} anti={true} />)
                     }
                 })
             }

@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
     ContentCard,
     ContentInfo,
     ContentPicture
 } from './Content.styled';
 
-const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
+const ContentDetails = ({ data, index, mediaPic, trailerType, popular, top, anti }) => {
+    const [arrayOne, setArrayOne] = useState([]);
+    const [arrayTwo, setArrayTwo] = useState([]);
+    const [arrayThree, setArrayThree] = useState([]);
+
     let rounded;
     let topRatedType;
     const mediaType = trailerType.slice(0, -1);
@@ -30,12 +34,54 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
     //console.log(data);
     //console.log(mediaPic);
 
+    useEffect(() => {
+        if (anti) {
+            mediaPic.map((item, index) => {
+                setTimeout(() => {
+                    setArrayOne((v) => [...v, item]);
+                }, 200 * index)
+            })
+        } 
+
+        if (top) {
+            mediaPic.map((item, index) => {
+                setTimeout(() => {
+                    setArrayTwo((v) => [...v, item]);
+                }, 200 * index)
+            })
+        } 
+
+        if (popular) {
+            mediaPic.map((item, index) => {
+                setTimeout(() => {
+                    setArrayThree((v) => [...v, item]);
+                }, 200 * index)
+            })
+        }
+
+    }, [mediaPic])
+
+    const handleRenderOne = useCallback((i) => {
+        return arrayOne[i];
+    })
+
+    const handleRenderTwo = useCallback((i) => {
+        return arrayTwo[i];
+    })
+
+    const handleRenderThree = useCallback((i) => {
+        return arrayThree[i];
+    })
+
+    //arrayOne resets to empty array. Possibly due to unmount/mount top level
+    //console.log(arrayOne)
+
     //TV Anticipated - Movie Anticipated
-    if (data[mediaType]) {
+    if (anti) {
         return (
             <ContentCard to={`/${topRatedType}/${data[mediaType].ids.tmdb}`} >
                 <ContentPicture>
-                    <img alt={data[mediaType].title + " poster"} src={mediaPic[index]} loading="lazy"/>
+                    <img alt={data[mediaType].title + " poster"} src={handleRenderOne(index)}/>
                 </ContentPicture>
 
                 <ContentInfo>
@@ -46,14 +92,14 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
         )
     }
     //TV Top-Rated- Movie Top-Rated
-    else if (data.popularity) {
+    else if (top) {
         let title;
         data.title ? title = data.title : title = data.original_name;
 
         return (
             <ContentCard to={`/${topRatedType}/${data.id}`} >
                 <ContentPicture>
-                    <img alt={data.title + " poster"} src={mediaPic[index]} loading="lazy"/>
+                    <img alt={data.title + " poster"} src={handleRenderTwo(index)} />
                 </ContentPicture>
 
                 <ContentInfo>
@@ -64,11 +110,11 @@ const ContentDetails = ({ data, index, mediaPic, trailerType }) => {
         )
     }
     //TV Popular - Movie Popular
-    else {
+    else if (popular) {
         return (
             <ContentCard to={`/${topRatedType}/${data.ids.tmdb}`}>
                 <ContentPicture>
-                    <img alt={data.title + " poster"} src={mediaPic[index]} loading="lazy"/>
+                    <img alt={data.title + " poster"} src={handleRenderThree(index)} />
                 </ContentPicture>
 
                 <ContentInfo>
