@@ -40,17 +40,10 @@ const PersonPage = ({ TMDb, setTrailerType }) => {
 
   if (mediaData.birthday !== undefined && mediaData.birthday !== null && rawDate.current === undefined) {
     rawDate.current = mediaData.birthday;
-    //console.log(mediaData.birthday);
   }
 
-  //console.log(rawDate);
 
   const { convertedDate } = useDateConversion({ rawDate: rawDate.current });
-
-  //console.log("media", mediaData)
-  //console.log("cast", castData)
-  //console.log("first", firstCreditHalf);
-  //console.log("sec", secCreditHalf);
 
   const handleClick = useCallback(() => {
     showText === "hide" ? setShowText("show") : setShowText("hide");

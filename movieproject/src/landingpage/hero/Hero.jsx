@@ -41,6 +41,11 @@ const Hero = ({ TraktDeets, TMDb, trailerType, setTrailerType }) => {
                     </TrailerView>
 
                     <HeroCard >
+                        {isPending &&
+                            <>
+                                <div style={{ height: "12.5rem" }} />
+                            </>}
+
                         {trailerType === "movies" &&
                             mediaData.map((film, index) => {
                                 if (mediaData[0].movie) {
@@ -48,6 +53,12 @@ const Hero = ({ TraktDeets, TMDb, trailerType, setTrailerType }) => {
                                         <HeroDetails isPending={isPending} key={index + film.movie.title}
                                             data={film} index={index} switchTrailer={switchTrailer}
                                             trailerPic={mediaPic} trailerType={trailerType} />
+                                    )
+                                } else {
+                                    return (
+                                        <>
+                                            <div style={{ height: "12.5rem" }} />
+                                        </>
                                     )
                                 }
                             })
@@ -61,8 +72,15 @@ const Hero = ({ TraktDeets, TMDb, trailerType, setTrailerType }) => {
                                             data={film} index={index} switchTrailer={switchTrailer}
                                             trailerPic={mediaPic} trailerType={trailerType} />
                                     )
+                                } else {
+                                    return (
+                                        <>
+                                            <div style={{ height: "12.5rem" }} />
+                                        </>
+                                    )
                                 }
                             })}
+
                     </HeroCard>
                 </HeroDisplayContainer>
 

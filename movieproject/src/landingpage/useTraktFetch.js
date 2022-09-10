@@ -97,6 +97,7 @@ const useTraktFetch = ({ trailerType, TMDb, TraktDeets, trending, popular, antic
             //console.log(poster);
             return poster
         }))
+
         setMediaPic(arrayImages);
     }
 

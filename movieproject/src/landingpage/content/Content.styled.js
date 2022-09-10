@@ -72,8 +72,6 @@ export const ContentCard = styled(Link)`
     color: black;
     text-align: center;
     flex-direction: column; 
-
-  
 `
 
 export const ContentPicture = styled.div`
