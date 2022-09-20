@@ -74,10 +74,10 @@ export const TrailerView = styled.div`
 `
 
 export const HeroCard = styled.div`
-    overflow-y: scroll;
-    flex: 1.25;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    flex: 1.25;
     row-gap: .5rem;
     margin-left: .5rem;
     height: 44rem;
@@ -85,7 +85,8 @@ export const HeroCard = styled.div`
     @media screen and (max-width: 1500px) {
         flex: 1.1;
         margin-left: 0rem;
-        flex-wrap: wrap;
+        
+        flex-direction: row;
         overflow-y: hidden;
         margin-top: .5rem;
         column-gap: .5rem;
