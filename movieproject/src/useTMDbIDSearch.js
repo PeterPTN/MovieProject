@@ -35,8 +35,8 @@ const useTMDbIDSearch = ({ id, movie, tv, person, TMDb }) => {
         } else if (person) {
             creditUrl = `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${TMDb.key}`;
         }
-        //429 error isn't happening here - headers will remain for future reference
-        const creditResponse = await fetch(creditUrl, { headers: { "Retry-After": 1 } });
+
+        const creditResponse = await fetch(creditUrl);
         const creditResponseJson = await creditResponse.json();
 
         //Limiting array items to prevent 429 errors
