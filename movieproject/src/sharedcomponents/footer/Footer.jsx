@@ -14,7 +14,7 @@ const Footer = () => {
                 <p className="tmdb">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
             </LogoContainer>
 
-            <p>&copy; 2022 <a href="mailto:peter.p.t.nguyen@gmail.com">Peter Nguyen</a></p>
+            <p>&copy; 2023 <a href="mailto:peter.p.t.nguyen@gmail.com">Peter Nguyen</a></p>
         </FooterContainer>
     )
 }
